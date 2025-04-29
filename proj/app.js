@@ -10,6 +10,10 @@ app.get('/hello', (req, res) => {
     res.send('Olá, mundo!');
 });
 
+app.get('/hello/:nome', (req, res) => {
+    res.send('Olá, ' + req.params.nome + '!');
+});
+
 app.get('/sobre', (req, res) => {
     res.send('Esta é uma aplicação simples sendo desenvolvida em Express.js.');
 });

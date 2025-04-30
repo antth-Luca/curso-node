@@ -1,27 +1,40 @@
-import path from 'path';
-import { fileURLToPath } from 'url';
 import express from 'express';
 import { engine } from 'express-handlebars';
-import Sequelize from 'sequelize';
+import bodyParser from 'body-parser';
+
+import { User } from './database/models/User.js';
 
 // Config
-    // Files
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = path.dirname(__filename);
     // Express
     const app = express();
     // Template Engine
     app.engine('handlebars', engine({defaultLayout: 'main'}));
     app.set('view engine', 'handlebars');
-    // Database
-    const sequelize = new Sequelize('cadastrosexpress', 'root', '', {
-        host: 'localhost',
-        dialect: 'mysql'
-    });
+    // Body Parser
+    app.use(bodyParser.urlencoded({extended: false}));
+    app.use(bodyParser.json())
 
-// Rotes
-app.get('/cadastrar-usuario', (req, res) => {
+
+// Routes
+app.get('/hello', (req, res) => {
+    res.render('hello');
+});
+
+app.get('/usuario/create', (req, res) => {
     res.render('usuario_form');
+});
+
+app.post('/usuario/create', (req, res) => {
+    User.create({
+        nome: req.body.nome,
+        sobrenome: req.body.sobrenome,
+        email: req.body.email,
+        data_nasc: req.body.data_nasc
+    }).then(() => {
+        res.redirect('/hello');
+    }).catch((error) => {
+        res.send('Failed: ' + error);
+    });
 });
 
 

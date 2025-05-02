@@ -26,12 +26,6 @@ app.get('/hello', (req, res) => {
     res.render('hello');
 });
 
-app.get('/usuario/list', (req, res) => {
-    User.findAll().then((users) => {
-        res.render('usuario_list', {users: users});
-    });
-});
-
 app.get('/usuario/create', (req, res) => {
     res.render('usuario_form');
 });
@@ -42,6 +36,47 @@ app.post('/usuario/create', (req, res) => {
         sobrenome: req.body.sobrenome,
         email: req.body.email,
         data_nasc: req.body.data_nasc
+    }).then(() => {
+        res.redirect('/hello');
+    }).catch((error) => {
+        res.send('Failed: ' + error);
+    });
+});
+
+app.get('/usuario/list', (req, res) => {
+    User.findAll().then((users) => {
+        res.render('usuario_list', {users: users});
+    });
+});
+
+app.get('/usuario/update/:id', (req, res) => {
+    User.findByPk(req.params.id).then((user) => {
+        res.render('usuario_update', {user: user});
+    }).catch((error) => {
+        res.send('Failed: ' + error);
+    });
+});
+
+app.post('/usuario/update/:id', (req, res) => {
+    User.update({
+        nome: req.body.nome,
+        sobrenome: req.body.sobrenome,
+        email: req.body.email,
+        data_nasc: req.body.data_nasc
+    },
+    {
+        where: {id: req.params.id}
+    }).then(() => {
+        res.redirect('/hello');
+    }).catch((error) => {
+        console.log(error);
+        res.send('Failed: ' + error);
+    });
+});
+
+app.get('/usuario/delete/:id', (req, res) => {
+    User.destroy({
+        where: {'id': req.params.id}
     }).then(() => {
         res.redirect('/hello');
     }).catch((error) => {

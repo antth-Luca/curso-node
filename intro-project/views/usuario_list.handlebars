@@ -1,0 +1,10 @@
+<h1>Lista de usuários:</h1>
+<ul>
+    {{#each users}}
+        <li>
+            {{nome}} {{sobrenome}}
+            <a href="/usuario/update/{{id}}">Editar</a>
+            <a href="/usuario/delete/{{id}}">Deletar</a>
+        </li>
+    {{/each}}
+</ul>

@@ -1,0 +1,16 @@
+<form action="/usuario/update/{{user.id}}" method="POST">
+    <p>Nome</p>
+    <input type="text" name="nome" placeholder="{{user.nome}}">
+
+    <p>Sobrenome</p>
+    <input type="text" name="sobrenome" placeholder="{{user.sobrenome}}">
+
+    <p>Email</p>
+    <input type="email" name="email" placeholder="{{user.email}}">
+
+    <p>Data de nascimento</p>
+    <input type="date" name="data_nasc" placeholder="{{user.data_nasc}}">
+
+    <br><br>
+    <button type="submit">Salvar</button>
+</form>

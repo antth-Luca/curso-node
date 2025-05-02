@@ -69,7 +69,6 @@ app.post('/usuario/update/:id', (req, res) => {
     }).then(() => {
         res.redirect('/hello');
     }).catch((error) => {
-        console.log(error);
         res.send('Failed: ' + error);
     });
 });

@@ -22,6 +22,6 @@ app.use(bodyParser.json())
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 // Static files
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/static', express.static(path.join(__dirname, 'public')));
 
 export default app;

@@ -1,0 +1,15 @@
+<form action="/admin/categoria/deletar/{{ categoria.id }}" method="POST">
+    <h3>
+        Certeza que deseja deletar a seguinte categoria?
+    </h3>
+    <div class="card mt-4">
+        <div class="card-body">
+            <h4>{{ categoria.nome }}</h4>
+            <small>{{ categoria.nome_slug }}</small>
+        </div>
+    </div>
+    <hr>
+
+    <a class="btn btn-info" href="/admin/categoria/lista">Voltar</a>
+    <button class="btn btn-danger">Deletar</button>
+</form>

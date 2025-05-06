@@ -42,7 +42,7 @@ router.get('/editar/:id', (req, res) => {
 });
 
 router.post('/editar/:id', (req, res) => {
-    Categoria.findOne({_id: req.params.id}).then((categoria => {
+    Categoria.findOne({_id: req.params.id}).then((categoria) => {
         categoria.nome = req.body.nome
         categoria.nome_slug = req.body.nome_slug
 
@@ -51,7 +51,25 @@ router.post('/editar/:id', (req, res) => {
         }).catch((error) => {
             req.flash('error_msg', 'Houve um erro');
         });
-    })).catch((error) => {
+    }).catch((error) => {
+        req.flash('error_msg', 'Houve um erro');
+    });
+});
+// Delete
+router.get('/deletar/:id', (req, res) => {
+    Categoria.findOne({_id: req.params.id}).then((categoria) => {
+        res.render(
+            'admin/categoria/categoria_deletar',
+            {categoria: categoria});
+    }).catch((error) => {
+        req.flash('error_msg', 'Houve um erro');
+    });
+});
+
+router.post('/deletar/:id', (req, res) => {
+    Categoria.deleteOne({_id: req.params.id}).then(() => {
+        res.redirect('/admin/categoria/lista');
+    }).catch((error) => {
         req.flash('error_msg', 'Houve um erro');
     });
 });

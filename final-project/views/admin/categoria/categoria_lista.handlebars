@@ -1,6 +1,6 @@
 <h2>Lista de categorias:</h2>
 <hr>
-<a href="/admin/categoria/criar" class="btn btn-info">
+<a href="/admin/categoria/criar" class="btn btn-success">
     Nova
 </a>
 
@@ -12,6 +12,15 @@
                 <small>{{ nome_slug }}</small>
                 <a href="/admin/categoria/editar/{{ id }}" class="btn btn-warning btn-sm">
                     Editar</a>
+                <a href="/admin/categoria/deletar/{{ id }}" class="btn btn-danger btn-sm">
+                    Deletar</a>
+            </div>
+        </div>
+    {{ else }}
+        <div class="card mt-4">
+            <div class="card-body">
+                <h4>Nenhuma categoria encontrada</h4>
+                <small>Sem nada para mostrar!</small>
             </div>
         </div>
     {{/each}}

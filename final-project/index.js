@@ -1,5 +1,5 @@
 import app from './config.js';
-import adminRouter from './routes/admin.js'
+import adminRouter from './routes/admin/admin.js'
 
 // Consts
 const PORT = 3000

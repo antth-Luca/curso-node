@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-mongoose.connect('mongodb://localhost/cadastroexpress')
+mongoose.connect('mongodb://localhost/blogexpress')
     .then(() => {
         console.log('>> MongoDB conectado...');
     }).catch((error) => {

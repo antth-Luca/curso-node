@@ -3,8 +3,14 @@ import router from '../Router.js';
 import Categoria from '../../database/models/Categoria.js';
 
 
-router.get('/', (req, res) => {
-    res.render('admin/categoria/categoria_lista');
+router.get('/lista', (req, res) => {
+    Categoria.find().then((categorias) => {
+        res.render(
+            'admin/categoria/categoria_lista',
+            {categorias: categorias});
+    }).catch((error) => {
+        req.flash('error_msg', 'Houve um erro');
+    });
 });
 
 router.get('/criar', (req, res) => {
@@ -19,7 +25,7 @@ router.post('/criar', (req, res) => {
 
     newCategoria.save()
         .then(() => {
-            res.redirect('/admin/categoria');
+            res.redirect('/admin/categoria/lista');
         }).catch((error) => {
             console.log('Erro ao salvar: ' + error);
         });

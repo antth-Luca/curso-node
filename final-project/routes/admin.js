@@ -1,15 +1,15 @@
 import router from './Router.js';
 
 router.get('/', (req, res) => {
-    res.send('Página principal do ADMIN');
+    res.render('admin/index');
 });
 
 router.get('/post', (req, res) => {
-    res.send('Página de posts');
+    res.render('admin/post');
 });
 
 router.get('/categoria', (req, res) => {
-    res.send('Página de categorias');
+    res.render('admin/categoria');
 });
 
 export default router;

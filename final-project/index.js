@@ -1,9 +1,7 @@
 import app from './config.js';
-
 import adminRouter from './routes/admin.js'
 
-import Model from './database/models/User.js';
-
+// Consts
 const PORT = 3000
 
 // Routes

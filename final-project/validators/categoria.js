@@ -3,7 +3,8 @@ export default function get_errors_categoria(body) {
     // Nome
     if(!body.nome || 
         typeof body.nome == undefined || 
-        body.nome == null) {
+        body.nome == null
+    ) {
             errors.push({text: 'Nome inválido'});
     } else if (body.nome.length < 2) {
         errors.push({text: 'Nome muito curto'});

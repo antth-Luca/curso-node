@@ -1,0 +1,28 @@
+{{> _form_errors }}
+
+<form action="/admin/postagem/criar" method="POST">
+    <h3>
+        Criando uma nova postagem
+    </h3>
+    <hr>
+
+    <label for="nome">Título: </label>
+    <input type="text" id="titulo" name="titulo" placeholder="Título da categoria" class="form-control" required>
+
+    <label for="categoria">Categoria: </label>
+    <select id="categoria" name="categoria" class="form-control" required>
+        <option value="0" disabled selected>Selecione...</option>
+
+        {{#each categorias }}
+            <option value="{{ _id }}">{{ nome }}</option>
+        {{ else }}
+            <option value="0" disabled>Nenhuma categoria registrada</option>
+        {{/each}}
+    </select>
+
+    <label for="conteudo">Conteudo: </label>
+    <textarea id="conteudo" name="conteudo" class="form-control" required></textarea>
+
+    <hr>
+    <button class="btn btn-success">Criar</button>
+</form>

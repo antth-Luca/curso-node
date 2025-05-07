@@ -1,0 +1,19 @@
+<h2>Últimas postagens:</h2>
+<hr>
+<div>
+    {{#each postagens }}
+        <div class="card mt-4">
+            <div class="card-body">
+                <h4>{{ titulo }}</h4>
+                <small>{{ categoria.nome }}</small>
+            </div>
+        </div>
+    {{ else }}
+        <div class="card mt-4">
+            <div class="card-body">
+                <h4>Nenhuma postagem encontrada</h4>
+                <small>Sem nada para mostrar!</small>
+            </div>
+        </div>
+    {{/each}}
+</div>

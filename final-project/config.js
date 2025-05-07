@@ -23,6 +23,11 @@ app.use((req, res, next) => {
 });
 // Template Engine
 app.engine('handlebars', engine({
+    helpers: {
+        ifEquals: (a, b, options) => {
+            return String(a) === String(b) ? options.fn(this) : options.inverse(this);
+        }
+    },
     defaultLayout: 'global',
     runtimeOptions: {
         allowProtoPropertiesByDefault: true,

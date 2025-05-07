@@ -1,0 +1,28 @@
+{{> _form_errors }}
+
+<form action="/admin/postagem/editar/{{ postagem._id }}" method="POST">
+    <h3>
+        Editando a postagem "{{ postagem.titulo }}"
+    </h3>
+    <hr>
+
+    <label for="nome">Título: </label>
+    <input type="text" id="titulo" name="titulo" placeholder="Título da categoria" class="form-control" value="{{ postagem.titulo }}" required>
+
+    <label for="categoria">Categoria: </label>
+    <select id="categoria" name="categoria" class="form-control" required>
+        {{#each categorias }}
+            <option value="{{ _id }}" {{#ifEquals _id ../postagem.categoria }}selected{{/ifEquals}}>
+                {{ nome }}
+            </option>
+        {{ else }}
+            <option value="0" disabled>Nenhuma categoria registrada</option>
+        {{/each}}
+    </select>
+
+    <label for="conteudo">Conteudo: </label>
+    <textarea id="conteudo" name="conteudo" class="form-control" required>{{ postagem.conteudo }}</textarea>
+
+    <hr>
+    <button class="btn btn-success">Editar</button>
+</form>

@@ -56,7 +56,7 @@ router.post('/editar/:id', (req, res) => {
         res.render('admin/categoria/categoria_editar', {
             errors: errors,
             categoria: {
-                _id: req.body._id,
+                _id: req.params.id,
                 nome: req.body.nome,
                 nome_slug: req.body.nome_slug
             }

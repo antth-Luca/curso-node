@@ -1,15 +1,16 @@
-import router from '../Router.js';
+import express from 'express';
 
 import Categoria from '../../database/models/Categoria.js';
 
 import get_errors_categoria from '../../validators/categoria.js';
 
+const router = express.Router();
+
 // Read
 router.get('/lista', (req, res) => {
     Categoria.find().sort({date: 'desc'}).then((categorias) => {
         res.render(
-            'admin/categoria/categoria_lista',
-            {categorias: categorias});
+            'admin/categoria/categoria_lista', {categorias: categorias});
     }).catch((error) => {
         req.flash('error_msg', 'Houve um erro.');
     });

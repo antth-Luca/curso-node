@@ -101,5 +101,23 @@ router.post('/editar/:id', (req, res) => {
         }).catch();
     }
 });
+// Delete
+router.get('/deletar/:id', (req, res) => {
+    Postagem.findOne({_id: req.params.id}).populate('categoria').then((postagem) => {
+        res.render('admin/postagem/postagem_deletar', {postagem: postagem});
+    }).catch((error) => {
+        req.flash('error_msg', 'A postagem não existe.');
+        req.redirect('/admin/postagem/lista');
+    });
+});
+
+router.post('/deletar/:id', (req, res) => {
+    Postagem.deleteOne({_id: req.params.id}).then(() => {
+        req.flash('success_msg', 'Postagem deletada!');
+        res.redirect('/admin/postagem/lista');
+    }).catch((error) => {
+        req.flash('error_msg', 'Erro ao deletar.');
+    });
+});
 
 export default router;

@@ -13,10 +13,10 @@
                 <p>
                     {{ conteudo }}
                 </p>
-                <a href="/admin/postagem/editar/{{ id }}" class="btn btn-warning btn-sm">
+                <a href="/admin/postagem/editar/{{ _id }}" class="btn btn-warning btn-sm">
                     Editar</a>
-                {{!-- <a href="/admin/postagem/deletar/{{ id }}" class="btn btn-danger btn-sm">
-                    Deletar</a> --}}
+                <a href="/admin/postagem/deletar/{{ _id }}" class="btn btn-danger btn-sm">
+                    Deletar</a>
             </div>
         </div>
     {{ else }}

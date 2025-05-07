@@ -6,7 +6,7 @@ import get_errors_categoria from '../../validators/categoria.js';
 
 // Read
 router.get('/lista', (req, res) => {
-    Categoria.find().then((categorias) => {
+    Categoria.find().sort({date: 'desc'}).then((categorias) => {
         res.render(
             'admin/categoria/categoria_lista',
             {categorias: categorias});
@@ -44,14 +44,22 @@ router.get('/editar/:id', (req, res) => {
         res.render(
             'admin/categoria/categoria_editar', {categoria: categoria});
     })).catch((error) => {
-        req.flash('error_msg', 'Houve um erro.');
+        req.flash('error_msg', 'A categoria não existe.');
+        res.redirect('/admin/categoria/lista');
     });
 });
 
 router.post('/editar/:id', (req, res) => {
     const errors = get_errors_categoria(req.body);
     if (errors.length > 0) {
-        res.render('admin/categoria/categoria_editar', {errors: errors});
+        res.render('admin/categoria/categoria_editar', {
+            errors: errors,
+            categoria: {
+                _id: req.body._id,
+                nome: req.body.nome,
+                nome_slug: req.body.nome_slug
+            }
+        });
     } else {
         Categoria.findOne({_id: req.params.id}).then((categoria) => {
             categoria.nome = req.body.nome
@@ -74,7 +82,8 @@ router.get('/deletar/:id', (req, res) => {
         res.render(
             'admin/categoria/categoria_deletar', {categoria: categoria});
     }).catch((error) => {
-        req.flash('error_msg', 'Houve um erro.');
+        req.flash('error_msg', 'A categoria não existe.');
+        res.redirect('/admin/categoria/lista');
     });
 });
 

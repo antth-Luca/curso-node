@@ -1,11 +1,26 @@
 import express from 'express';
 import { engine } from 'express-handlebars';
 import bodyParser from 'body-parser';
+import session from 'express-session';
+import flash from 'connect-flash';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
 // Express
 const app = express();
+// Session
+app.use(session({
+    secret: 'cursonode#blogexpress',
+    resave: true,
+    saveUninitialized: true
+}));
+app.use(flash());
+// Middlewares
+app.use((req, res, next) => {
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    next();
+});
 // Template Engine
 app.engine('handlebars', engine({
     defaultLayout: 'global',

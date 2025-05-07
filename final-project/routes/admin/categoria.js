@@ -2,6 +2,8 @@ import router from '../Router.js';
 
 import Categoria from '../../database/models/Categoria.js';
 
+import get_errors_categoria from '../../validators/categoria.js';
+
 // Read
 router.get('/lista', (req, res) => {
     Categoria.find().then((categorias) => {
@@ -9,7 +11,7 @@ router.get('/lista', (req, res) => {
             'admin/categoria/categoria_lista',
             {categorias: categorias});
     }).catch((error) => {
-        req.flash('error_msg', 'Houve um erro');
+        req.flash('error_msg', 'Houve um erro.');
     });
 });
 // Create
@@ -18,56 +20,67 @@ router.get('/criar', (req, res) => {
 });
 
 router.post('/criar', (req, res) => {
-    const newCategoria = new Categoria({
-        nome: req.body.nome,
-        nome_slug: req.body.nome_slug
-    });
-
-    newCategoria.save()
-        .then(() => {
-            res.redirect('/admin/categoria/lista');
-        }).catch((error) => {
-            console.log('Erro ao salvar: ' + error);
+    const errors = get_errors_categoria(req.body);
+    if (errors.length > 0) {
+        res.render('admin/categoria/categoria_criar', {errors: errors});
+    } else {
+        const newCategoria = new Categoria({
+            nome: req.body.nome,
+            nome_slug: req.body.nome_slug
         });
+    
+        newCategoria.save()
+            .then(() => {
+                req.flash('success_msg', 'Categoria criada!');
+                res.redirect('/admin/categoria/lista');
+            }).catch((error) => {
+                req.flash('error_msg', 'Houve um erro.');
+            });
+    }
 });
 // Update
 router.get('/editar/:id', (req, res) => {
     Categoria.findOne({_id: req.params.id}).then((categoria => {
         res.render(
-            'admin/categoria/categoria_editar',
-            {categoria: categoria});
+            'admin/categoria/categoria_editar', {categoria: categoria});
     })).catch((error) => {
-        req.flash('error_msg', 'Houve um erro');
+        req.flash('error_msg', 'Houve um erro.');
     });
 });
 
 router.post('/editar/:id', (req, res) => {
-    Categoria.findOne({_id: req.params.id}).then((categoria) => {
-        categoria.nome = req.body.nome
-        categoria.nome_slug = req.body.nome_slug
-
-        categoria.save().then(() => {
-            res.redirect('/admin/categoria/lista');
+    const errors = get_errors_categoria(req.body);
+    if (errors.length > 0) {
+        res.render('admin/categoria/categoria_editar', {errors: errors});
+    } else {
+        Categoria.findOne({_id: req.params.id}).then((categoria) => {
+            categoria.nome = req.body.nome
+            categoria.nome_slug = req.body.nome_slug
+    
+            categoria.save().then(() => {
+                req.flash('success_msg', 'Categoria editada!');
+                res.redirect('/admin/categoria/lista');
+            }).catch((error) => {
+                req.flash('error_msg', 'Houve um erro.');
+            });
         }).catch((error) => {
-            req.flash('error_msg', 'Houve um erro');
+            req.flash('error_msg', 'Houve um erro.');
         });
-    }).catch((error) => {
-        req.flash('error_msg', 'Houve um erro');
-    });
+    }
 });
 // Delete
 router.get('/deletar/:id', (req, res) => {
     Categoria.findOne({_id: req.params.id}).then((categoria) => {
         res.render(
-            'admin/categoria/categoria_deletar',
-            {categoria: categoria});
+            'admin/categoria/categoria_deletar', {categoria: categoria});
     }).catch((error) => {
-        req.flash('error_msg', 'Houve um erro');
+        req.flash('error_msg', 'Houve um erro.');
     });
 });
 
 router.post('/deletar/:id', (req, res) => {
     Categoria.deleteOne({_id: req.params.id}).then(() => {
+        req.flash('success_msg', 'Categoria deletada!');
         res.redirect('/admin/categoria/lista');
     }).catch((error) => {
         req.flash('error_msg', 'Houve um erro');

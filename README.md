@@ -9,4 +9,8 @@ Curso de Node.js com Victor Lima - [YouTube](https://youtube.com/playlist?list=P
 * Handlebars
 * Sequelize
 * MySQL
+* Mongoose
 * MongoDB
+* Body Parser
+* Express Session
+* Connect Flash

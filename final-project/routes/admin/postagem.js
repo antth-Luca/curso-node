@@ -38,6 +38,7 @@ router.post('/criar', (req, res) => {
     } else {
         const newPostagem = new Postagem({
             titulo: req.body.titulo,
+            titulo_slug: req.body.titulo_slug,
             categoria: req.body.categoria,
             conteudo: req.body.conteudo
         });
@@ -77,6 +78,7 @@ router.post('/editar/:id', (req, res) => {
                 postagem: {
                     _id: req.params.id,
                     titulo: req.body.titulo,
+                    titulo_slug: req.body.titulo_slug,
                     categoria: req.body.categoria,
                     conteudo: req.body.conteudo
                 },
@@ -88,6 +90,7 @@ router.post('/editar/:id', (req, res) => {
     } else {
         Postagem.findOne({_id: req.params.id}).then((postagem) => {
             postagem.titulo = req.body.titulo,
+            postagem.titulo_slug = req.body.titulo_slug,
             postagem.categoria = req.body.categoria,
             postagem.conteudo = req.body.conteudo
 

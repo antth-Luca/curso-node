@@ -6,6 +6,10 @@ const PostagemSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    titulo_slug: {
+        type: String,
+        required: true
+    },
     conteudo: {
         type: String,
         required: true

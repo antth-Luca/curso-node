@@ -2,12 +2,14 @@
 <hr>
 <div>
     {{#each postagens }}
-        <div class="card mt-4">
+        <a href="/postagem/{{ titulo_slug }}" class="card mt-4" style="text-decoration: none;">
             <div class="card-body">
                 <h4>{{ titulo }}</h4>
                 <small>{{ categoria.nome }}</small>
+                <hr>
+                <small>{{ date }}</small>
             </div>
-        </div>
+        </a>
     {{ else }}
         <div class="card mt-4">
             <div class="card-body">

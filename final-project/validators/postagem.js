@@ -9,6 +9,15 @@ export default function get_errors_postagem(body) {
     } else if (body.titulo.length < 2) {
         errors.push({text: 'Título muito curto'});
     }
+    // Título slug
+    if(!body.titulo_slug ||
+        typeof body.titulo_slug == undefined ||
+        body.titulo_slug== null
+    ) {
+        errors.push({text: 'Título slug inválido'});
+    } else if (body.titulo_slug.length < 2) {
+        errors.push({text: 'Título slug muito curto'});
+    }
     // Categoria
     if(body.categoria == 0 ||
         !body.categoria ||

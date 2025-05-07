@@ -6,8 +6,11 @@
     </h3>
     <hr>
 
-    <label for="nome">Título: </label>
+    <label for="titulo">Título: </label>
     <input type="text" id="titulo" name="titulo" placeholder="Título da categoria" class="form-control" value="{{ postagem.titulo }}" required>
+
+    <label for="titulo_slug">Título Slug: </label>
+    <input type="text" id="titulo_slug" name="titulo_slug" placeholder="Título Slug da categoria" class="form-control" value="{{ postagem.titulo_slug }}" required>
 
     <label for="categoria">Categoria: </label>
     <select id="categoria" name="categoria" class="form-control" required>

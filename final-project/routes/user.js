@@ -58,5 +58,12 @@ router.post('/entrar', (req, res, next) => {
         failureFlash: true
     })(req, res, next);
 });
+// Sair
+router.get('/sair', (req, res, next) => {
+    req.logout((err) => {
+        if (err) return next(err);
+        res.redirect('/');
+    });
+});
 
 export default router;

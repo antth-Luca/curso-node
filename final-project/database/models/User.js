@@ -10,13 +10,21 @@ const UserSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    data_nasc: {
+        type: Date,
+        required: true
+    },
     email: {
         type: String,
         required: true
     },
-    data_nasc: {
-        type: Date,
+    senha: {
+        type: String,
         required: true
+    },
+    is_admin: {
+        type: Boolean,
+        default: false
     }
 });
 

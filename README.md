@@ -14,3 +14,4 @@ Curso de Node.js com Victor Lima - [YouTube](https://youtube.com/playlist?list=P
 * Body Parser
 * Express Session
 * Connect Flash
+* BCryptJS

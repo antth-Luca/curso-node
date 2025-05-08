@@ -1,0 +1,21 @@
+{{#if error }}
+    <div class="alert alert-danger">
+            {{ error }}
+        </div>
+{{/if}}
+
+<form action="/entrar" method="POST">
+    <h3>Entrando no BlogExpress</h3>
+    <hr>
+
+    <label for="email">Email: </label>
+    <input type="text" id="email" name="email" placeholder="example@mail.com" class="form-control" required>
+
+    <label for="senha">Senha: </label>
+    <input type="password" id="senha" name="senha" placeholder="Digite sua senha" class="form-control" required>
+
+    <hr>
+    <button class="btn btn-success">Entrar</button>
+
+    <a href="/registrar" class="d-block mt-4"><small>Ainda não tenho conta</small></a>
+</form>

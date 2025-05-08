@@ -15,3 +15,4 @@ Curso de Node.js com Victor Lima - [YouTube](https://youtube.com/playlist?list=P
 * Express Session
 * Connect Flash
 * BCryptJS
+* PassportJS

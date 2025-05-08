@@ -1,10 +1,10 @@
 import express from 'express';
 import bcrypt from 'bcryptjs';
+import passport from 'passport';
 
 import User from '../database/models/User.js';
 
 import get_errors_user from '../validators/user.js';
-import nodemon from 'nodemon';
 
 const router = express.Router();
 
@@ -45,6 +45,18 @@ router.post('/registrar', (req, res) => {
             }
         });
     }
+});
+// Entrar
+router.get('/entrar', (req, res) => {
+    res.render('user/user_entrar');
+})
+
+router.post('/entrar', (req, res, next) => {
+    passport.authenticate('local', {
+        successRedirect: '/',
+        failureRedirect: '/entrar',
+        failureFlash: true
+    })(req, res, next);
 });
 
 export default router;

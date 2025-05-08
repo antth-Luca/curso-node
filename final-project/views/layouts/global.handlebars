@@ -8,6 +8,11 @@
 </head>
 <body>
     {{> _navbar }}
+    {{#if error }}
+        <div class="alert alert-danger">
+            {{ error }}
+        </div>
+    {{/if}}
     {{> _toast_notifications }}
 
     <div class="container mt-4">
